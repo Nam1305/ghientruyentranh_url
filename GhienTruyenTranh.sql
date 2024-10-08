@@ -1,43 +1,34 @@
 ﻿---------------------------------------------DDL---------------------------------------------
 CREATE TABLE Categories (
   category_id   int IDENTITY NOT NULL, 
-  category_name varchar(255) NOT NULL, 
+  category_name nvarchar(255) NOT NULL, 
   PRIMARY KEY (category_id));
-  -------------------------------------
 CREATE TABLE Chapters (
   chapter_id     int IDENTITY NOT NULL, 
   story_id       int NOT NULL, 
-  chapter_number varchar(255) NOT NULL, 
-  title          varchar(255) NOT NULL, 
+  chapter_number nvarchar(255) NOT NULL, 
+  title          nvarchar(255) NOT NULL, 
   created_at     datetime NOT NULL, 
   updated_at     datetime NOT NULL, 
   PRIMARY KEY (chapter_id));
-  -------------------------------------
-
 CREATE TABLE Chapters_Image (
   ImageID    int IDENTITY NOT NULL, 
   chapter_id int NOT NULL, 
-  image_url  varchar(255) NOT NULL, 
+  image_url  nvarchar(255) NOT NULL, 
   PageNumber int NOT NULL, 
   PRIMARY KEY (ImageID));
-  -------------------------------------
-
 CREATE TABLE Comments (
   comment_id int IDENTITY NOT NULL, 
   user_id    int NOT NULL, 
   story_id   int NOT NULL, 
   chapter_id int NOT NULL, 
-  content    varchar(1000) NULL, 
+  content    nvarchar(1000) NULL, 
   created_at datetime NOT NULL, 
   PRIMARY KEY (comment_id));
-  -------------------------------------
-
 CREATE TABLE Favorites (
   user_id  int NOT NULL, 
   story_id int NOT NULL, 
   added_at datetime NOT NULL);
-  -------------------------------------
-
 CREATE TABLE Ratings (
   rating_id  int IDENTITY NOT NULL, 
   user_id    int NOT NULL, 
@@ -45,51 +36,41 @@ CREATE TABLE Ratings (
   rating     int NOT NULL, 
   created_at datetime NOT NULL, 
   PRIMARY KEY (rating_id));
-  -------------------------------------
-
 CREATE TABLE Reports (
   report_id  int IDENTITY NOT NULL, 
   user_id    int NOT NULL, 
   comment_id int NOT NULL, 
   story_id   int NOT NULL, 
-  reason     varchar(1000) NOT NULL, 
+  reason     nvarchar(1000) NOT NULL, 
   created_at datetime NOT NULL, 
   PRIMARY KEY (report_id));
-  -------------------------------------
-
 CREATE TABLE Stories (
   story_id    int IDENTITY NOT NULL, 
-  title       varchar(255) NOT NULL, 
-  author      varchar(255) NOT NULL, 
-  description varchar(5000) NULL, 
-  cover_image varchar(255) NOT NULL, 
-  status      varchar(255) NOT NULL, 
+  title       nvarchar(255) NOT NULL, 
+  author      nvarchar(255) NOT NULL, 
+  description nvarchar(2000) NULL, 
+  cover_image nvarchar(255) NOT NULL, 
+  status      nvarchar(255) NOT NULL, 
   created_at  datetime NOT NULL, 
   updated_at  datetime NOT NULL, 
   like_count  int NOT NULL, 
   PRIMARY KEY (story_id));
-  -------------------------------------
-
 CREATE TABLE story_categories (
   story_id    int NOT NULL, 
   category_id int NOT NULL, 
   PRIMARY KEY (story_id, 
   category_id));
-  -------------------------------------
-
 CREATE TABLE Users (
   user_id    int IDENTITY NOT NULL, 
-  username   varchar(255) NOT NULL, 
-  email      varchar(255) NOT NULL, 
-  password   varchar(10) NOT NULL, 
-  avatar     varchar(255) NULL, 
-  role       varchar(255) NOT NULL, 
+  username   nvarchar(255) NOT NULL, 
+  email      nvarchar(255) NOT NULL, 
+  password   nvarchar(10) NOT NULL, 
+  avatar     nvarchar(255) NULL, 
+  role       nvarchar(255) NOT NULL, 
   created_at datetime NOT NULL, 
   updated_at datetime NOT NULL, 
   vip        int NOT NULL, 
   PRIMARY KEY (user_id));
-  -------------------------------------
-
 ALTER TABLE Chapters ADD CONSTRAINT FKChapters224263 FOREIGN KEY (story_id) REFERENCES Stories (story_id);
 ALTER TABLE story_categories ADD CONSTRAINT FKstory_cate722913 FOREIGN KEY (story_id) REFERENCES Stories (story_id);
 ALTER TABLE story_categories ADD CONSTRAINT FKstory_cate597472 FOREIGN KEY (category_id) REFERENCES Categories (category_id);
@@ -104,6 +85,7 @@ ALTER TABLE Ratings ADD CONSTRAINT FKRatings958054 FOREIGN KEY (user_id) REFEREN
 ALTER TABLE Ratings ADD CONSTRAINT FKRatings180148 FOREIGN KEY (story_id) REFERENCES Stories (story_id);
 ALTER TABLE Reports ADD CONSTRAINT FKReports185772 FOREIGN KEY (story_id) REFERENCES Stories (story_id);
 ALTER TABLE Chapters_Image ADD CONSTRAINT FKChapters_I919581 FOREIGN KEY (chapter_id) REFERENCES Chapters (chapter_id);
+
 
 ---------------------------------------------INSERT DATA------------------------------------------------------------
 
